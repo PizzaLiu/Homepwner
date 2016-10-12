@@ -13,6 +13,7 @@
 		5A548EF51DAE40B0006E1723 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A548EF31DAE40B0006E1723 /* Main.storyboard */; };
 		5A548EF71DAE40B0006E1723 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A548EF61DAE40B0006E1723 /* Assets.xcassets */; };
 		5A548EFA1DAE40B0006E1723 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A548EF81DAE40B0006E1723 /* LaunchScreen.storyboard */; };
+		5A548F031DAE4245006E1723 /* BNRItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A548F021DAE4245006E1723 /* BNRItemsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,8 @@
 		5A548EF61DAE40B0006E1723 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5A548EF91DAE40B0006E1723 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5A548EFB1DAE40B0006E1723 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5A548F011DAE4245006E1723 /* BNRItemsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRItemsViewController.h; sourceTree = "<group>"; };
+		5A548F021DAE4245006E1723 /* BNRItemsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRItemsViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +70,8 @@
 				5A548EF81DAE40B0006E1723 /* LaunchScreen.storyboard */,
 				5A548EFB1DAE40B0006E1723 /* Info.plist */,
 				5A548EEA1DAE40B0006E1723 /* Supporting Files */,
+				5A548F011DAE4245006E1723 /* BNRItemsViewController.h */,
+				5A548F021DAE4245006E1723 /* BNRItemsViewController.m */,
 			);
 			path = Homepwner;
 			sourceTree = "<group>";
@@ -152,6 +157,7 @@
 			files = (
 				5A548EF21DAE40B0006E1723 /* ViewController.m in Sources */,
 				5A548EEF1DAE40B0006E1723 /* AppDelegate.m in Sources */,
+				5A548F031DAE4245006E1723 /* BNRItemsViewController.m in Sources */,
 				5A548EEC1DAE40B0006E1723 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
