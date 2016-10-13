@@ -19,7 +19,7 @@
 
 +(instancetype)sharedStore
 {
-    BNRItemStore *sharedStore = nil;
+    static BNRItemStore *sharedStore = nil;
     
     if (!sharedStore) {
         sharedStore = [[self alloc] initPrivate];
@@ -50,7 +50,7 @@
 
 - (BNRItem *)createItem
 {
-    BNRItem *item = [[BNRItem alloc] init];
+    BNRItem *item = [BNRItem randomItem];
     [self.privateItems addObject:item];
     return item;
 }

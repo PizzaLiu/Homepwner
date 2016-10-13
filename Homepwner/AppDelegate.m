@@ -17,10 +17,14 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
     BNRItemsViewController *itemsViewController = [[BNRItemsViewController alloc] init];
     
     self.window.rootViewController = itemsViewController;
     
+    self.window.backgroundColor = [UIColor clearColor];
+    [self.window makeKeyAndVisible];
     return YES;
 }
 
