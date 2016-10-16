@@ -28,9 +28,13 @@
         for (int i=0; i < 35; i++) {
             [[BNRItemStore sharedStore] createItem];
         }
+        _expItems = [[[BNRItemStore sharedStore] allItems] filteredArrayUsingPredicate:expPredicate];
+        _chpItems = [[[BNRItemStore sharedStore] allItems] filteredArrayUsingPredicate:chpPredicate];
+
+        UIImageView *backView = [[UIImageView alloc] init];
+        backView.image = [UIImage imageNamed:@"ListBg"];
+        self.tableView.backgroundView = backView;
     }
-    _expItems = [[[BNRItemStore sharedStore] allItems] filteredArrayUsingPredicate:expPredicate];
-    _chpItems = [[[BNRItemStore sharedStore] allItems] filteredArrayUsingPredicate:chpPredicate];
     return self;
 }
 
@@ -77,9 +81,12 @@
         cell.textLabel.text = @"No more items!";
         cell.textLabel.textColor = [UIColor darkGrayColor];
         cell.textLabel.textAlignment = NSTextAlignmentCenter;
+        [tableView setRowHeight:44];
     } else {
         BNRItem *item = items[indexPath.row];
         cell.textLabel.text = item.description;
+        [tableView setRowHeight:60];
+        cell.textLabel.font = [cell.textLabel.font fontWithSize:20.0];
     }
 
     return cell;
