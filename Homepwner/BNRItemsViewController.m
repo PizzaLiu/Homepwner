@@ -42,7 +42,11 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     NSArray *items = [self getSectionItems:section];
-    return [items count];
+    NSInteger count = [items count];
+    if (section >= (tableView.numberOfSections - 1)) {
+        count ++;
+    }
+    return count;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -50,6 +54,7 @@
     return 2;
 }
 
+/*
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
     if (section >= (tableView.numberOfSections - 1)) {
@@ -57,18 +62,26 @@
         label.text = @"No more items!";
         label.textColor = [UIColor darkGrayColor];
         label.textAlignment = NSTextAlignmentCenter;
+
         return label;
     }
     return nil;
 }
+ */
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell" forIndexPath:indexPath];
     NSArray *items = [self getSectionItems:indexPath.section];
-    BNRItem *item = items[indexPath.row];
-    
-    cell.textLabel.text = item.description;
+    if (indexPath.section >= (tableView.numberOfSections - 1) && indexPath.row >= [items count]) {
+        cell.textLabel.text = @"No more items!";
+        cell.textLabel.textColor = [UIColor darkGrayColor];
+        cell.textLabel.textAlignment = NSTextAlignmentCenter;
+    } else {
+        BNRItem *item = items[indexPath.row];
+        cell.textLabel.text = item.description;
+    }
+
     return cell;
 }
 
