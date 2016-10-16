@@ -15,19 +15,19 @@
     NSArray *randomAdjectiveList = @[@"Fluffy", @"Rusty", @"Shiny"];
     NSArray *randomNounList = @[@"Bear", @"Spork", @"Mac"];
     
-    NSInteger adjectiveIndex = arc4random() % [randomAdjectiveList count];
-    NSInteger nounIndex = arc4random() % [randomNounList count];
+    NSInteger adjectiveIndex = arc4random_uniform([randomAdjectiveList count]);
+    NSInteger nounIndex = arc4random_uniform([randomNounList count]);
     
     NSString *name = [NSString stringWithFormat:@"%@ %@",
-                      [randomNounList objectAtIndex:adjectiveIndex],
+                      [randomAdjectiveList objectAtIndex:adjectiveIndex],
                       [randomNounList objectAtIndex:nounIndex]];
-    int value = arc4random() % 100;
+    int value = arc4random_uniform(100);
     NSString *sNum = [NSString stringWithFormat:@"%c%c%c%c%c",
-                      '0'+arc4random() % 10,
-                      'A'+arc4random() % 26,
-                      '0'+arc4random() % 10,
-                      'A'+arc4random() % 26,
-                      '0'+arc4random() % 10];
+                      '0'+arc4random_uniform(10),
+                      'A'+arc4random_uniform(26),
+                      '0'+arc4random_uniform(10),
+                      'A'+arc4random_uniform(26),
+                      '0'+arc4random_uniform(10)];
     
     BNRItem *newItem = [[self alloc] initWithItemName:name valueInDollars:value serialNumber:sNum];
     return newItem;
