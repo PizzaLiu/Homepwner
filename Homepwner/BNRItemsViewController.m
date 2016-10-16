@@ -50,6 +50,18 @@
     return 2;
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    if (section >= (tableView.numberOfSections - 1)) {
+        UILabel *label = [[UILabel alloc] init];
+        label.text = @"No more items!";
+        label.textColor = [UIColor darkGrayColor];
+        label.textAlignment = NSTextAlignmentCenter;
+        return label;
+    }
+    return nil;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell" forIndexPath:indexPath];
