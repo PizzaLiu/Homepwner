@@ -38,7 +38,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[[BNRItemStore sharedStore] allItems] count];
+    return [[[BNRItemStore sharedStore] allItems] count] + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -46,10 +46,23 @@
     // UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"UITableViewCell"];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell" forIndexPath:indexPath];
     NSArray *items = [[BNRItemStore sharedStore] allItems];
-    BNRItem *item = items[indexPath.row];
+    if (indexPath.row >= [items count]) {
+        cell.textLabel.text = @"No more items!";
+        cell.textLabel.textAlignment = NSTextAlignmentCenter;
+    } else {
+        BNRItem *item = items[indexPath.row];
+        cell.textLabel.text = item.description;
+    }
     
-    cell.textLabel.text = item.description;
     return cell;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row >= [[[BNRItemStore sharedStore] allItems] count]) {
+        return NO;
+    }
+    return YES;
 }
 
 - (void)viewDidLoad
