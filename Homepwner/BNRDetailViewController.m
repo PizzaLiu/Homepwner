@@ -22,7 +22,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    UIToolbar* numberToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
+    numberToolbar.barStyle = UIBarStyleDefault;
+    numberToolbar.items = @[
+                            [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
+                            [[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(doneWithNumberPad)]
+                            ];
+    [numberToolbar sizeToFit];
+    self.valueField.inputAccessoryView = numberToolbar;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -65,6 +72,10 @@
 {
     _item = item;
     self.navigationItem.title = item.itemName;
+}
+
+-(void)doneWithNumberPad{
+    [self.valueField resignFirstResponder];
 }
 
 
