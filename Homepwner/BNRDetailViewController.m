@@ -85,6 +85,7 @@
     }
 
     imagePicker.delegate = self;
+    imagePicker.allowsEditing = YES;
 
     [self presentViewController:imagePicker animated:YES completion:nil];
 }
