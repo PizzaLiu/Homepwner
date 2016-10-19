@@ -7,6 +7,7 @@
 //
 
 #import "BNRDetailViewController.h"
+#import "BNRChangeCreatedDateViewController.h"
 #import "BNRItem.h"
 
 @interface BNRDetailViewController ()
@@ -15,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *serialNumberField;
 @property (weak, nonatomic) IBOutlet UITextField *valueField;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+@property (weak, nonatomic) IBOutlet UIButton *changeDateBtn;
 
 @end
 
@@ -78,6 +80,12 @@
     [self.valueField resignFirstResponder];
 }
 
+- (IBAction)changeCreatedDate:(id)sender
+{
+    BNRChangeCreatedDateViewController *ccdVc = [[BNRChangeCreatedDateViewController alloc] init];
+    ccdVc.item = self.item;
+    [self.navigationController pushViewController:ccdVc animated:YES];
+}
 
 /*
 #pragma mark - Navigation

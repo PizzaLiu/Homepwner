@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BNRDetailViewController">
             <connections>
+                <outlet property="changeDateBtn" destination="zLv-cJ-3vb" id="0R4-Kr-ojG"/>
                 <outlet property="dateLabel" destination="BNY-ES-HHX" id="zr0-xc-bmA"/>
                 <outlet property="nameField" destination="jni-5A-9lg" id="Gax-DJ-voT"/>
                 <outlet property="serialNumberField" destination="SFQ-NU-jbT" id="I1Q-JE-kad"/>
@@ -44,7 +45,7 @@
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vlm-gG-Frl">
                     <rect key="frame" x="110" y="196" width="162" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                    <textInputTraits key="textInputTraits" keyboardType="numberPad" enablesReturnKeyAutomatically="YES"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="H4S-KY-KhX"/>
                     </connections>
@@ -67,6 +68,13 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zLv-cJ-3vb">
+                    <rect key="frame" x="115" y="278" width="90" height="30"/>
+                    <state key="normal" title="Change Date"/>
+                    <connections>
+                        <action selector="changeCreatedDate:" destination="-1" eventType="touchUpInside" id="XrE-QR-S3v"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
