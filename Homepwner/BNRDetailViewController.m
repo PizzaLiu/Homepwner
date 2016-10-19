@@ -99,6 +99,12 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+
+- (IBAction)trashImage:(id)sender {
+    self.imageView.image = nil;
+    [[BNRImageStore sharedStore] deleteImageForKey:self.item.itemKey];
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];

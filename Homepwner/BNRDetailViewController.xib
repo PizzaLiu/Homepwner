@@ -80,6 +80,12 @@
                                 <action selector="takePicture:" destination="-1" id="xaN-lu-neq"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="5NP-Zs-89Q"/>
+                        <barButtonItem systemItem="trash" id="3YM-oZ-4X1">
+                            <connections>
+                                <action selector="trashImage:" destination="-1" id="cQa-VU-tHi"/>
+                            </connections>
+                        </barButtonItem>
                     </items>
                 </toolbar>
             </subviews>
