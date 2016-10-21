@@ -9,6 +9,7 @@
 #import "BNRDetailViewController.h"
 #import "BNRItem.h"
 #import "BNRImageStore.h"
+#import "CrosshairView.h"
 
 @interface BNRDetailViewController ()
  <UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate>
@@ -80,6 +81,12 @@
 
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+
+        CGRect rec = imagePicker.view.frame;
+        rec.size.height = imagePicker.preferredContentSize.height;
+        CrosshairView *cView = [[CrosshairView alloc] initWithFrame: rec];
+
+        imagePicker.cameraOverlayView = cView;
     } else {
         imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     }
