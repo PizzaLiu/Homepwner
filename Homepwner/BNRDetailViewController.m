@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolBar;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *cameraButton;
 
 @end
 
@@ -26,7 +27,29 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+
+    UIImageView *iv = [[UIImageView alloc] initWithImage:nil];
+    iv.contentMode = UIViewContentModeScaleAspectFit;
+    iv.translatesAutoresizingMaskIntoConstraints = NO;
+
+    [self.view addSubview:iv];
+    self.imageView = iv;
+    [self.imageView setContentHuggingPriority:200 forAxis:UILayoutConstraintAxisVertical];
+    [self.imageView setContentCompressionResistancePriority:700 forAxis:UILayoutConstraintAxisHorizontal];
+
+
+    NSDictionary *nameMap = @{@"imageView": self.imageView,
+                              @"dateLabel": self.dateLabel,
+                              @"toolBar": self.toolBar};
+    NSArray *horizontalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[imageView]-0-|" options:0 metrics:nil views:nameMap];
+    NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[dateLabel]-8-[imageView]-8-[toolBar]" options:0 metrics:nil views:nameMap];
+
+    [self.view addConstraints:horizontalConstraints];
+    [self.view addConstraints:verticalConstraints];
+
+    // self.imageView.width = 1.5 * self.imageView.height + 0.0;
+    // NSLayoutConstraint *aspectConstraint = [NSLayoutConstraint constraintWithItem:self.imageView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self.imageView attribute:NSLayoutAttributeHeight multiplier:1.5 constant:0.0];
+    // [self.imageView addConstraint:aspectConstraint];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -37,6 +60,10 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+
+    UIInterfaceOrientation nowOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+    [self prepareForViewsOrientation:nowOrientation];
+
     BNRItem *item = self.item;
 
     self.nameField.text = item.itemName;
@@ -106,6 +133,42 @@
 - (IBAction)backgroundTapped:(id)sender {
     [self.view endEditing:YES];
 }
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
+{
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+        return UIInterfaceOrientationMaskAll;
+    } else {
+        return UIInterfaceOrientationMaskAllButUpsideDown;
+    }
+}
+
+- (void)prepareForViewsOrientation:(UIInterfaceOrientation)orientation
+{
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+        return;
+    }
+
+    if (UIInterfaceOrientationIsLandscape(orientation)) {
+        self.imageView.hidden = YES;
+        self.cameraButton.enabled = NO;
+    } else {
+        self.imageView.hidden = NO;
+        self.cameraButton.enabled = YES;
+    }
+}
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [self prepareForViewsOrientation:toInterfaceOrientation];
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    self interfaceOrientation;
+}
+
+- did
 
 /*
 #pragma mark - Navigation
