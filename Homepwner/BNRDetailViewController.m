@@ -11,7 +11,7 @@
 #import "BNRImageStore.h"
 
 @interface BNRDetailViewController ()
- <UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate>
+ <UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate, UIPopoverPresentationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
 @property (weak, nonatomic) IBOutlet UITextField *serialNumberField;
@@ -113,7 +113,14 @@
 
     imagePicker.delegate = self;
 
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+        imagePicker.modalPresentationStyle = UIModalPresentationPopover;
+        imagePicker.popoverPresentationController.barButtonItem = sender;
+        imagePicker.popoverPresentationController.delegate = self;
+    }
+
     [self presentViewController:imagePicker animated:YES completion:nil];
+
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
@@ -161,6 +168,11 @@
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     [self prepareForViewsOrientation:toInterfaceOrientation];
+}
+
+- (void)popoverPresentationControllerDidDismissPopover:(UIPopoverPresentationController *)popoverPresentationController
+{
+    NSLog(@"dismiss");
 }
 
 
