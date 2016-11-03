@@ -70,11 +70,18 @@
 - (IBAction)addNewItem:(id)sender
 {
     BNRItem *newItem = [[BNRItemStore sharedStore] createItem];
-    NSInteger lastRow = [[BNRItemStore sharedStore].allItems indexOfObject:newItem];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:lastRow inSection:0];
-    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:YES];
+    // NSInteger lastRow = [[BNRItemStore sharedStore].allItems indexOfObject:newItem];
+    // NSIndexPath *indexPath = [NSIndexPath indexPathForRow:lastRow inSection:0];
+    // [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:YES];
+    BNRDetailViewController *detailViewController = [[BNRDetailViewController alloc] initForNewItem:YES];
+    detailViewController.item = newItem;
+    detailViewController.dismissBlock = ^{
+        [self.tableView reloadData];
+    };
+    UINavigationController *navViewController = [[UINavigationController alloc] initWithRootViewController:detailViewController];
+    navViewController.modalPresentationStyle = UIModalPresentationFormSheet;
+    [self presentViewController:navViewController animated:YES completion:nil];
 }
-
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -93,7 +100,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    BNRDetailViewController *detailControllder = [[BNRDetailViewController alloc] init];
+    BNRDetailViewController *detailControllder = [[BNRDetailViewController alloc] initForNewItem:NO];
 
     BNRItem *item = [[[BNRItemStore sharedStore] allItems] objectAtIndex:indexPath.row];
     detailControllder.item = item;
