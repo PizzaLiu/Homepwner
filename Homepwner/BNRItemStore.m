@@ -45,9 +45,15 @@
 - (instancetype)initPrivate
 {
     self = [super init];
+    /*
     if (self) {
         _privateItems = [[NSMutableArray alloc] init];
     }
+     */
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _privateItems = [[NSMutableArray alloc] init];
+    });
     return self;
 }
 
