@@ -163,12 +163,6 @@
     [self prepareForViewsOrientation:toInterfaceOrientation];
 }
 
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
-{
-    self interfaceOrientation;
-}
-
-- did
 
 /*
 #pragma mark - Navigation
