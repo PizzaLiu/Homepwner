@@ -10,6 +10,7 @@
 #import "BNRItem.h"
 #import "BNRImageStore.h"
 #import "BNRItemStore.h"
+#import "ImagePickerBackgroundView.h"
 
 @interface BNRDetailViewController ()
  <UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate, UIPopoverPresentationControllerDelegate>
@@ -151,6 +152,12 @@
         imagePicker.modalPresentationStyle = UIModalPresentationPopover;
         imagePicker.popoverPresentationController.barButtonItem = sender;
         imagePicker.popoverPresentationController.delegate = self;
+
+        UIEdgeInsets edge = UIEdgeInsetsMake(450, 250, 50, 250);
+        imagePicker.popoverPresentationController.popoverLayoutMargins = edge;
+
+        //imagePicker.popoverPresentationController.backgroundColor = [UIColor redColor];
+        imagePicker.popoverPresentationController.popoverBackgroundViewClass = [ImagePickerBackgroundView class];
     }
 
     [self presentViewController:imagePicker animated:YES completion:nil];
