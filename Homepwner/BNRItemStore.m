@@ -52,7 +52,11 @@
      */
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        _privateItems = [[NSMutableArray alloc] init];
+        NSString *itemsArchivePath = [self itemsArchivePath];
+        _privateItems = [NSKeyedUnarchiver unarchiveObjectWithFile:itemsArchivePath];
+        if (!_privateItems) {
+            _privateItems = [[NSMutableArray alloc] init];
+        }
     });
     return self;
 }
@@ -84,6 +88,23 @@
     BNRItem *item = [self.privateItems objectAtIndex:fromIndex];
     [self.privateItems removeObjectAtIndex:fromIndex];
     [self.privateItems insertObject:item atIndex:toIndex];
+}
+
+# pragma mark - archive
+
+
+- (NSString *) itemsArchivePath
+{
+    NSArray *docPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docPath = [docPaths firstObject];
+    return [docPath stringByAppendingPathComponent:@"items.data"];
+}
+
+- (BOOL)saveItems
+{
+    NSString *itemsArchivePath = [self itemsArchivePath];
+
+    return [NSKeyedArchiver archiveRootObject:self.allItems toFile:itemsArchivePath];
 }
 
 @end

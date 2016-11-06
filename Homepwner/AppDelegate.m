@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "BNRItemsViewController.h"
+#import "BNRItemStore.h";
 
 @interface AppDelegate ()
 
@@ -38,6 +39,12 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    BOOL saveItemsDone = [[BNRItemStore sharedStore] saveItems];
+    if (saveItemsDone) {
+        NSLog(@"items save done");
+    } else {
+        NSLog(@"items save faild");
+    }
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
