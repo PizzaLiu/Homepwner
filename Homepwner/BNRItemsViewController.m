@@ -10,6 +10,7 @@
 #import "BNRItem.h"
 #import "BNRItemStore.h"
 #import "BNRDetailViewController.h"
+#import "BNRItemCell.h"
 
 @interface BNRItemsViewController()
 
@@ -34,6 +35,7 @@
         navItem.rightBarButtonItem = bbi;
 
         navItem.leftBarButtonItem = self.editButtonItem;
+        self.tableView.rowHeight = 60.0;
     }
     return self;
 }
@@ -51,21 +53,26 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"UITableViewCell"];
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell" forIndexPath:indexPath];
+    BNRItemCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BNRItemCell" forIndexPath:indexPath];
     NSArray *items = [[BNRItemStore sharedStore] allItems];
     BNRItem *item = items[indexPath.row];
     
-    cell.textLabel.text = item.description;
+    cell.nameLabel.text = item.itemName;
+    cell.serialNumberLabel.text = item.serialNumber;
+    cell.valueLabel.text = [NSString stringWithFormat:@"%d", item.valueInDollars];
+    [cell.imageView setImage:item.thumbnail];
+    [cell setClipsToBounds:NO];
     return cell;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"UITableViewCell"];
-}
 
+    UINib *nib = [UINib nibWithNibName:@"BNRItemCell" bundle:nil];
+    [self.tableView registerNib:nib forCellReuseIdentifier:@"BNRItemCell"];
+    self.tableView.separatorInset = UIEdgeInsetsZero;
+}
 
 - (IBAction)addNewItem:(id)sender
 {

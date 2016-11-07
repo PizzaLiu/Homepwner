@@ -163,6 +163,7 @@
 
     [[BNRImageStore sharedStore] setImage:image forKey:self.item.itemKey];
     self.imageView.image = image;
+    [self.item setThumbnailFromImage:image];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
