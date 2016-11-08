@@ -12,6 +12,7 @@
 		3E640C751DB5D984002F358A /* BNRDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E640C731DB5D984002F358A /* BNRDetailViewController.xib */; };
 		3EBDD82D1DD064EC004A9E6A /* BNRItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBDD82B1DD064EC004A9E6A /* BNRItemCell.m */; };
 		3EBDD82E1DD064EC004A9E6A /* BNRItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EBDD82C1DD064EC004A9E6A /* BNRItemCell.xib */; };
+		3EBDD8311DD1B7E5004A9E6A /* BNRImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBDD8301DD1B7E5004A9E6A /* BNRImageViewController.m */; };
 		5A548EEC1DAE40B0006E1723 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A548EEB1DAE40B0006E1723 /* main.m */; };
 		5A548EEF1DAE40B0006E1723 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A548EEE1DAE40B0006E1723 /* AppDelegate.m */; };
 		5A548EF21DAE40B0006E1723 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A548EF11DAE40B0006E1723 /* ViewController.m */; };
@@ -32,6 +33,8 @@
 		3EBDD82A1DD064EC004A9E6A /* BNRItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRItemCell.h; sourceTree = "<group>"; };
 		3EBDD82B1DD064EC004A9E6A /* BNRItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRItemCell.m; sourceTree = "<group>"; };
 		3EBDD82C1DD064EC004A9E6A /* BNRItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BNRItemCell.xib; sourceTree = "<group>"; };
+		3EBDD82F1DD1B7E5004A9E6A /* BNRImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRImageViewController.h; sourceTree = "<group>"; };
+		3EBDD8301DD1B7E5004A9E6A /* BNRImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRImageViewController.m; sourceTree = "<group>"; };
 		5A548EE71DAE40B0006E1723 /* Homepwner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Homepwner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A548EEB1DAE40B0006E1723 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5A548EED1DAE40B0006E1723 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -103,6 +106,8 @@
 				3EBDD82A1DD064EC004A9E6A /* BNRItemCell.h */,
 				3EBDD82B1DD064EC004A9E6A /* BNRItemCell.m */,
 				3EBDD82C1DD064EC004A9E6A /* BNRItemCell.xib */,
+				3EBDD82F1DD1B7E5004A9E6A /* BNRImageViewController.h */,
+				3EBDD8301DD1B7E5004A9E6A /* BNRImageViewController.m */,
 			);
 			path = Homepwner;
 			sourceTree = "<group>";
@@ -197,6 +202,7 @@
 				5A548F031DAE4245006E1723 /* BNRItemsViewController.m in Sources */,
 				5A548EEC1DAE40B0006E1723 /* main.m in Sources */,
 				5A548F091DAF270B006E1723 /* BNRItemStore.m in Sources */,
+				3EBDD8311DD1B7E5004A9E6A /* BNRImageViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

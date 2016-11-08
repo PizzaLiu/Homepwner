@@ -11,6 +11,8 @@
 #import "BNRItemStore.h"
 #import "BNRDetailViewController.h"
 #import "BNRItemCell.h"
+#import "BNRImageStore.h"
+#import "BNRImageViewController.h"
 
 @interface BNRItemsViewController()
 
@@ -61,7 +63,32 @@
     cell.serialNumberLabel.text = item.serialNumber;
     cell.valueLabel.text = [NSString stringWithFormat:@"$%d", item.valueInDollars];
     [cell.thumbnailView setImage:item.thumbnail];
-    [cell setClipsToBounds:NO];
+    __weak BNRItemCell *wCell = cell;
+    cell.actionBlock = ^{
+        if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+            UIImage *image = [[BNRImageStore sharedStore] imageForKey:item.itemKey];
+            if (!image) {
+                return;
+            }
+            CGRect rect = wCell.thumbnailView.bounds;
+            BNRImageViewController *imvc = [[BNRImageViewController alloc] init];
+            imvc.image = image;
+
+            CGSize popSize = CGSizeMake(600, 600);
+            CGSize imgSize = image.size;
+            float ratio = MIN(popSize.width / imgSize.width, popSize.height / imgSize.height);
+            popSize.height = imgSize.height * ratio;
+            popSize.width = imgSize.width * ratio;
+            // [imvc setPreferredContentSize:CGSizeMake(600, 600)];
+
+            imvc.preferredContentSize = popSize;
+            imvc.modalPresentationStyle = UIModalPresentationPopover;
+            imvc.popoverPresentationController.sourceView = wCell.thumbnailView;
+            imvc.popoverPresentationController.sourceRect = rect;
+
+            [self presentViewController:imvc animated:YES completion:nil];
+        }
+    };
     return cell;
 }
 

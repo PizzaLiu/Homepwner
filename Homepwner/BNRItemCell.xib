@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -18,12 +19,13 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Wcq-KU-Z1K">
                         <rect key="frame" x="10" y="9" width="40" height="40"/>
                         <constraints>
+                            <constraint firstAttribute="width" secondItem="Wcq-KU-Z1K" secondAttribute="height" multiplier="1:1" id="fpw-R4-Q2d"/>
                             <constraint firstAttribute="height" constant="40" id="hRd-HH-41q"/>
                             <constraint firstAttribute="width" constant="40" id="qn1-zT-n56"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YnM-KZ-7so">
-                        <rect key="frame" x="66" y="9" width="43" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YnM-KZ-7so">
+                        <rect key="frame" x="66" y="11" width="43" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="a6N-a7-ReA"/>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="q6p-Va-4KO"/>
@@ -37,8 +39,8 @@
                             </mask>
                         </variation>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="serialNumber" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gE1-G8-1yU">
-                        <rect key="frame" x="66" y="35" width="92" height="15"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="serialNumber" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gE1-G8-1yU">
+                        <rect key="frame" x="66" y="34" width="92" height="15"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="40o-LL-WET"/>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="15" id="Vbp-tr-Kvl"/>
@@ -61,9 +63,18 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AdQ-wI-iPP">
+                        <rect key="frame" x="10" y="9" width="40" height="40"/>
+                        <connections>
+                            <action selector="showImage:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="OHC-dv-Taw"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="AdQ-wI-iPP" firstAttribute="top" secondItem="Wcq-KU-Z1K" secondAttribute="top" id="8fX-Qz-01r"/>
                     <constraint firstItem="Wcq-KU-Z1K" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="BN9-zx-9p6"/>
+                    <constraint firstItem="AdQ-wI-iPP" firstAttribute="height" secondItem="Wcq-KU-Z1K" secondAttribute="height" id="D7c-wl-JLH"/>
+                    <constraint firstItem="AdQ-wI-iPP" firstAttribute="leading" secondItem="Wcq-KU-Z1K" secondAttribute="leading" id="EMc-e3-xp2"/>
                     <constraint firstAttribute="bottomMargin" secondItem="gE1-G8-1yU" secondAttribute="bottom" constant="1" id="Jnn-8F-3lu"/>
                     <constraint firstItem="YnM-KZ-7so" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="1" id="Np4-6r-MIK"/>
                     <constraint firstItem="gE1-G8-1yU" firstAttribute="leading" secondItem="Wcq-KU-Z1K" secondAttribute="trailing" constant="16" id="RrT-dT-Sya"/>
@@ -71,6 +82,7 @@
                     <constraint firstItem="jO0-WL-Q0U" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="aYf-83-y4z"/>
                     <constraint firstItem="gE1-G8-1yU" firstAttribute="top" relation="greaterThanOrEqual" secondItem="YnM-KZ-7so" secondAttribute="bottom" constant="5" id="laQ-RT-VbD"/>
                     <constraint firstAttribute="trailingMargin" secondItem="jO0-WL-Q0U" secondAttribute="trailing" constant="6" id="o8h-hu-CJZ"/>
+                    <constraint firstItem="AdQ-wI-iPP" firstAttribute="width" secondItem="Wcq-KU-Z1K" secondAttribute="width" id="xbR-2o-AHB"/>
                     <constraint firstItem="Wcq-KU-Z1K" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="zWE-8o-VqO"/>
                 </constraints>
                 <variation key="default">
