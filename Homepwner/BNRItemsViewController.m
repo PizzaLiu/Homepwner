@@ -35,7 +35,7 @@
         navItem.rightBarButtonItem = bbi;
 
         navItem.leftBarButtonItem = self.editButtonItem;
-        self.tableView.rowHeight = 60.0;
+        self.tableView.rowHeight = 65.0;
     }
     return self;
 }
@@ -59,8 +59,8 @@
     
     cell.nameLabel.text = item.itemName;
     cell.serialNumberLabel.text = item.serialNumber;
-    cell.valueLabel.text = [NSString stringWithFormat:@"%d", item.valueInDollars];
-    [cell.imageView setImage:item.thumbnail];
+    cell.valueLabel.text = [NSString stringWithFormat:@"$%d", item.valueInDollars];
+    [cell.thumbnailView setImage:item.thumbnail];
     [cell setClipsToBounds:NO];
     return cell;
 }
@@ -71,7 +71,6 @@
 
     UINib *nib = [UINib nibWithNibName:@"BNRItemCell" bundle:nil];
     [self.tableView registerNib:nib forCellReuseIdentifier:@"BNRItemCell"];
-    self.tableView.separatorInset = UIEdgeInsetsZero;
 }
 
 - (IBAction)addNewItem:(id)sender
