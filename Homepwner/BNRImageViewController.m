@@ -10,14 +10,17 @@
 
 @interface BNRImageViewController ()
 
+@property (nonatomic, strong) UIImageView *imageView;
+
 @end
 
 @implementation BNRImageViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UIImageView *imgView = (UIImageView *)self.view;
-    imgView.image = self.image;
+    //[self.imageView setCenter:CGPointMake(600/2, 600/2)];
+    // UIImageView *imgView = self.imageView;
+    // imgView.image = self.image;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -27,9 +30,37 @@
 
 - (void)loadView
 {
-    UIImageView *imgView = [[UIImageView alloc] initWithImage:nil];
-    imgView.contentMode = UIViewContentModeScaleAspectFit;
-    self.view = imgView;
+    CGSize size = self.preferredContentSize;
+
+    self.imageView = [[UIImageView alloc] initWithImage:self.image];
+
+    CGRect frame = self.imageView.frame;
+    frame.size = size;
+
+
+    self.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    self.imageView.frame = frame;
+    self.imageView.center = CGPointMake(size.width/2, size.height/2);
+
+    UIScrollView *scrollView = [[UIScrollView alloc] init];
+
+    scrollView.contentSize = CGSizeMake(size.width, size.height);
+    scrollView.pagingEnabled = NO;
+    scrollView.scrollEnabled = NO;
+    scrollView.zoomScale = 1.0;
+    scrollView.minimumZoomScale = 1.0;
+    scrollView.maximumZoomScale = 5.0;
+    scrollView.delegate = self;
+
+    [scrollView addSubview:self.imageView];
+
+    self.view = scrollView;
+}
+
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
+{
+    //[self.imageView setCenter:CGPointMake(600/2, 600/2)];
+    return self.imageView;
 }
 
 /*

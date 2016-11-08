@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BNRImageViewController : UIViewController
+@interface BNRImageViewController : UIViewController <UIScrollViewDelegate>
 
 @property (nonatomic, strong) UIImage *image;
 
