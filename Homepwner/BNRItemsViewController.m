@@ -37,7 +37,10 @@
         navItem.rightBarButtonItem = bbi;
 
         navItem.leftBarButtonItem = self.editButtonItem;
-        self.tableView.rowHeight = 65.0;
+        // self.tableView.rowHeight = 65.0;
+
+        NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
+        [defaultCenter addObserver:self selector:@selector(updateTableViewForDynamicTypeSize) name:UIContentSizeCategoryDidChangeNotification object:nil];
     }
     return self;
 }
@@ -145,7 +148,45 @@
 {
     [super viewWillAppear:animated];
 
+    [self updateTableViewForDynamicTypeSize];
+}
+
+- (void)updateTableViewForDynamicTypeSize
+{
+    static NSDictionary *cellHeightDictionary;
+
+    if (!cellHeightDictionary) {
+        cellHeightDictionary = @{
+                                 @"UICTContentSizeCategoryXS": @55,
+                                 @"UICTContentSizeCategoryS": @55,
+                                 @"UICTContentSizeCategoryM":@55,
+                                 @"UICTContentSizeCategoryL":@55,
+                                 @"UICTContentSizeCategoryXL":@60,
+                                 @"UICTContentSizeCategoryXXL":@65,
+                                 @"UICTContentSizeCategoryXXXL":@70,
+                                 @"UICTContentSizeCategoryAccessibilityM":@80,
+                                 @"UICTContentSizeCategoryAccessibilityL":@90,
+                                 @"UICTContentSizeCategoryAccessibilityXL":@100,
+                                 @"UICTContentSizeCategoryAccessibilityXXL":@110,
+                                 @"UICTContentSizeCategoryAccessibilityXXXL":@130
+                                 };
+    }
+
+    NSString *userSize = [[UIApplication sharedApplication] preferredContentSizeCategory];
+    NSLog(@"userSize: %@", userSize);
+    NSNumber *cellHeight = cellHeightDictionary[userSize];
+
+    [self.tableView setRowHeight:cellHeight.floatValue];
+
     [self.tableView reloadData];
+
+}
+
+- (void)dealloc
+{
+    NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
+
+    [defaultCenter removeObserver:self];
 }
 
 @end
