@@ -5,7 +5,7 @@
 //  Created by Liu on 16/10/13.
 //  Copyright © 2016年 Liu. All rights reserved.
 //
-
+@import CoreData;
 #import <Foundation/Foundation.h>
 
 @class BNRItem;
@@ -20,6 +20,8 @@
 -(void)removeItem:(BNRItem *)item;
 -(void)moveItemAtIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex;
 -(BOOL)saveItems;
-//-(NSArray *)allAssetTypes;
+// -(NSArray *)allAssetTypes;
+-(void)addAssetType:(NSString *)label;
+-(void)removeAssetType:(NSManagedObject *)assetType;
 
 @end

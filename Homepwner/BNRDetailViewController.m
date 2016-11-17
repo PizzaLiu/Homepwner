@@ -248,13 +248,17 @@
     atvc.item = self.item;
 
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        atvc.modalPresentationStyle = UIModalPresentationPopover;
-        atvc.popoverPresentationController.barButtonItem = sender;
+        //atvc.modalPresentationStyle = UIModalPresentationPopover;
+        //atvc.popoverPresentationController.barButtonItem = sender;
         atvc.dismissBlock = ^{
             [self freshAssetTypeLabel];
         };
 
-        [self presentViewController:atvc animated:YES completion:nil];
+        UINavigationController *navViewController = [[UINavigationController alloc] initWithRootViewController:atvc];
+        navViewController.modalPresentationStyle = UIModalPresentationPopover;
+        navViewController.popoverPresentationController.barButtonItem = sender;
+
+        [self presentViewController:navViewController animated:YES completion:nil];
     } else {
         [self.navigationController pushViewController:atvc animated:YES];
     }

@@ -5,7 +5,6 @@
 //  Created by Liu on 16/10/13.
 //  Copyright © 2016年 Liu. All rights reserved.
 //
-@import CoreData;
 #import "BNRItemStore.h"
 #import "BNRItem.h"
 #import "BNRImageStore.h"
@@ -13,8 +12,8 @@
 @interface BNRItemStore()
 
 @property(nonatomic)NSMutableArray *privateItems;
-@property(nonatomic, strong)NSManagedObjectContext *context;
 @property(nonatomic, strong)NSManagedObjectModel *model;
+@property(nonatomic, strong)NSManagedObjectContext *context;
 
 @end
 
@@ -207,22 +206,29 @@
     }
 
     if ([_allAssetTypes count] == 0) {
-        NSManagedObject *type;
-
-        type = [NSEntityDescription insertNewObjectForEntityForName:@"BNRAssetType" inManagedObjectContext:self.context];
-        [type setValue:@"Furniture" forKey:@"label"];
-        [_allAssetTypes addObject:type];
-
-        type = [NSEntityDescription insertNewObjectForEntityForName:@"BNRAssetType" inManagedObjectContext:self.context];
-        [type setValue:@"Jewelry" forKey:@"label"];
-        [_allAssetTypes addObject:type];
-
-        type = [NSEntityDescription insertNewObjectForEntityForName:@"BNRAssetType" inManagedObjectContext:self.context];
-        [type setValue:@"Electronics" forKey:@"label"];
-        [_allAssetTypes addObject:type];
+        [self addAssetType:@"Furniture"];
+        [self addAssetType:@"Jewelry"];
+        [self addAssetType:@"Electronics"];
     }
 
     return _allAssetTypes;
+}
+
+- (void)addAssetType:(NSString *)label
+{
+    NSManagedObject *type;
+
+    type = [NSEntityDescription insertNewObjectForEntityForName:@"BNRAssetType" inManagedObjectContext:self.context];
+    [type setValue:label forKey:@"label"];
+    [_allAssetTypes addObject:type];
+}
+
+- (void)removeAssetType:(NSManagedObject *)assetType
+{
+    NSLog(@"Remove~");
+    [self.allAssetTypes removeObjectIdenticalTo:assetType];
+
+    [self.context deleteObject:assetType];
 }
 
 @end

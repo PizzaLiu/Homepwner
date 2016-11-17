@@ -8,6 +8,7 @@
 
 #import "BNRAssetTypeViewController.h"
 #import "BNRItemStore.h"
+#import "BNRAssetTypeDetailViewController.h"
 
 @interface BNRAssetTypeViewController ()
 
@@ -21,9 +22,11 @@
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"UITableViewCell"];
     
     self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+
+    UIBarButtonItem *addButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addType:)];
+
+    self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    self.navigationItem.rightBarButtonItem = addButtonItem;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -78,7 +81,6 @@
     cell.accessoryType = UITableViewCellAccessoryCheckmark;
 
     self.item.assetType = assetType;
-    [self.tableView reloadData];
 
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         [self dismissViewControllerAnimated:YES completion:self.dismissBlock];
@@ -91,6 +93,39 @@
 {
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
     cell.accessoryType = UITableViewCellAccessoryNone;
+}
+
+#pragma mark - edit
+
+- (void)addType:(id)sender
+{
+    BNRAssetTypeDetailViewController *atdvc = [[BNRAssetTypeDetailViewController alloc] init];
+    atdvc.dismissBlock = ^{
+        [self.tableView reloadData];
+    };
+
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:atdvc];
+        navController.modalPresentationStyle = UIModalPresentationFormSheet;
+        [self presentViewController:navController animated:YES completion:nil];
+    } else {
+        [self.navigationController pushViewController:atdvc animated:YES];
+    }
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return @"remove";
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        NSArray *allAssetTypes = [[BNRItemStore sharedStore] allAssetTypes];
+        NSManagedObject *assetType = [allAssetTypes objectAtIndex:indexPath.row];
+        [[BNRItemStore sharedStore] removeAssetType:assetType];
+        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }
 }
 
 @end
