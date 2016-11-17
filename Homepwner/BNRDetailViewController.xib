@@ -96,6 +96,7 @@
                                 <action selector="takePicture:" destination="-1" id="xaN-lu-neq"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="djy-di-4xj"/>
                         <barButtonItem title="Item" id="QEG-GS-1Ex">
                             <connections>
                                 <action selector="showAssetTypePicker:" destination="-1" id="I1i-6x-Ckr"/>

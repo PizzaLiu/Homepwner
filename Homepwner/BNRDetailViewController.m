@@ -126,13 +126,7 @@
     self.imageView.image = image;
     [self updateFonts];
 
-    NSString *assetTypeLabel = [[self.item assetType] valueForKey:@"label"];
-
-    if (!assetTypeLabel) {
-        assetTypeLabel = @"None";
-    }
-
-    self.assetTypeButton.title = [NSString stringWithFormat:@"Type: %@", assetTypeLabel];
+    [self freshAssetTypeLabel];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -253,7 +247,29 @@
     BNRAssetTypeViewController *atvc = [[BNRAssetTypeViewController alloc] init];
     atvc.item = self.item;
 
-    [self.navigationController pushViewController:atvc animated:YES];
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        atvc.modalPresentationStyle = UIModalPresentationPopover;
+        atvc.popoverPresentationController.barButtonItem = sender;
+        atvc.dismissBlock = ^{
+            [self freshAssetTypeLabel];
+        };
+
+        [self presentViewController:atvc animated:YES completion:nil];
+    } else {
+        [self.navigationController pushViewController:atvc animated:YES];
+    }
+
+}
+
+- (void)freshAssetTypeLabel
+{
+    NSString *assetTypeLabel = [[self.item assetType] valueForKey:@"label"];
+
+    if (!assetTypeLabel) {
+        assetTypeLabel = @"None";
+    }
+
+    self.assetTypeButton.title = [NSString stringWithFormat:@"Type: %@", assetTypeLabel];
 }
 
 /*
