@@ -10,6 +10,7 @@
 #import "BNRItem.h"
 #import "BNRImageStore.h"
 #import "BNRItemStore.h"
+#import "BNRAssetTypeViewController.h"
 
 @interface BNRDetailViewController ()
  <UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate, UIPopoverPresentationControllerDelegate>
@@ -24,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *serialNumberLabel;
 @property (weak, nonatomic) IBOutlet UILabel *valueLabel;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *assetTypeButton;
 
 @end
 
@@ -123,6 +125,14 @@
     UIImage *image = [[BNRImageStore sharedStore] imageForKey:imgKey];
     self.imageView.image = image;
     [self updateFonts];
+
+    NSString *assetTypeLabel = [[self.item assetType] valueForKey:@"label"];
+
+    if (!assetTypeLabel) {
+        assetTypeLabel = @"None";
+    }
+
+    self.assetTypeButton.title = [NSString stringWithFormat:@"Type: %@", assetTypeLabel];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -237,6 +247,14 @@
     [defaultCenter removeObserver:self name:UIContentSizeCategoryDidChangeNotification object:nil];
 }
 
+- (IBAction)showAssetTypePicker:(id)sender {
+    [self.view endEditing:YES];
+
+    BNRAssetTypeViewController *atvc = [[BNRAssetTypeViewController alloc] init];
+    atvc.item = self.item;
+
+    [self.navigationController pushViewController:atvc animated:YES];
+}
 
 /*
 #pragma mark - Navigation

@@ -1,32 +1,23 @@
 //
 //  BNRItem.h
-//  RandomItems
+//  Homepwner
 //
-//  Created by Rainbow on 16/10/2.
-//  Copyright © 2016年 Rainbow. All rights reserved.
+//  Created by Rainbow on 16/11/15.
+//  Copyright © 2016年 Liu. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
 
-@interface BNRItem : NSObject <NSCoding>
+NS_ASSUME_NONNULL_BEGIN
 
+@interface BNRItem : NSManagedObject
 
-@property (nonatomic, copy) NSString *itemName;
-@property (nonatomic, copy) NSString *serialNumber;
-@property (nonatomic) int valueInDollars;
-@property (nonatomic, readonly, strong) NSDate *dateCreated;
-@property (nonatomic, copy) NSString *itemKey;
-@property (nonatomic, strong) UIImage *thumbnail;
-
-
-+(instancetype)randomItem;
-
--(instancetype)initWithItemName:(NSString *)name
-                 valueInDollars:(int)value
-                   serialNumber:(NSString *)sNumber;
-
--(instancetype)initWithItemName:(NSString *)name;
 -(void)setThumbnailFromImage:(UIImage *)image;
 
 @end
+
+NS_ASSUME_NONNULL_END
+
+#import "BNRItem+CoreDataProperties.h"
