@@ -44,29 +44,58 @@
     return [super initWithStyle:UITableViewStylePlain];
 }
 
+- (NSArray *)getRelativeItems
+{
+    return [self.item.assetType valueForKey:@"items"];
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    if (!self.item.assetType) {
+        return 1;
+    }
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [[[BNRItemStore sharedStore] allAssetTypes] count];
+    if (section == 0) {
+        return [[[BNRItemStore sharedStore] allAssetTypes] count];
+    }
+
+    return [[self getRelativeItems] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell" forIndexPath:indexPath];
 
-    NSArray *allTypes = [[BNRItemStore sharedStore] allAssetTypes];
-    NSManagedObject *assetType = allTypes[indexPath.row];
-    NSString *assetLabel = [assetType valueForKey:@"label"];
+    if (indexPath.section == 0) {
+        NSArray *allTypes = [[BNRItemStore sharedStore] allAssetTypes];
+        NSManagedObject *assetType = allTypes[indexPath.row];
+        NSString *assetLabel = [assetType valueForKey:@"label"];
 
-    cell.textLabel.text = assetLabel;
+        cell.textLabel.text = assetLabel;
 
-    if (assetType == self.item.assetType) {
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        if (assetType == self.item.assetType) {
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        } else {
+            cell.accessoryType = UITableViewCellAccessoryNone;
+        }
     } else {
-        cell.accessoryType = UITableViewCellAccessoryNone;
+        NSArray *items = [self getRelativeItems];
+        BNRItem *item = [items objectAtIndex:indexPath.row];
+
+        /*
+        NSArray *allItems = [[BNRItemStore sharedStore] allItems];
+        NSPredicate *p = [NSPredicate predicateWithFormat:@"AssetType == %@", self.item.assetType];
+        NSArray *typeItems = [allItems filteredArrayUsingPredicate:p];
+
+        BNRItem *item = typeItems[indexPath.row];
+         */
+
+        cell.textLabel.text = item.itemName;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.textLabel.textColor = [UIColor darkGrayColor];
     }
 
     return cell;
@@ -74,6 +103,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.section != 0) {
+        return;
+    }
     NSArray *allTypes = [[BNRItemStore sharedStore] allAssetTypes];
     NSManagedObject *assetType = allTypes[indexPath.row];
 
@@ -93,6 +125,15 @@
 {
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
     cell.accessoryType = UITableViewCellAccessoryNone;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    if (section == 0) {
+        return @"All Types";
+    }
+
+    return [NSString stringWithFormat:@"All Items of Label: %@", [self.item.assetType valueForKey:@"label"] ];
 }
 
 #pragma mark - edit

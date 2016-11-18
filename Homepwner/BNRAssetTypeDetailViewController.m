@@ -50,7 +50,7 @@
 
 - (void)done:(id)sender
 {
-    if (!self.labelTextField.text) {
+    if ([self.labelTextField.text isEqualToString:@""]) {
         return ;
     }
     [self setEditing:NO];

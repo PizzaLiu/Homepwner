@@ -2,7 +2,7 @@
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="14F2009" minimumToolsVersion="Xcode 7.0">
     <entity name="BNRAssetType" syncable="YES">
         <attribute name="label" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="BNRItem" inverseName="assetType" inverseEntity="BNRItem" syncable="YES"/>
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="BNRItem" inverseName="assetType" inverseEntity="BNRItem" syncable="YES"/>
     </entity>
     <entity name="BNRItem" representedClassName="BNRItem" syncable="YES">
         <attribute name="dateCreated" optional="YES" attributeType="Date" syncable="YES"/>
@@ -15,7 +15,7 @@
         <relationship name="assetType" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BNRAssetType" inverseName="items" inverseEntity="BNRAssetType" syncable="YES"/>
     </entity>
     <elements>
-        <element name="BNRItem" positionX="-63" positionY="-18" width="128" height="163"/>
         <element name="BNRAssetType" positionX="-54" positionY="45" width="128" height="75"/>
+        <element name="BNRItem" positionX="-63" positionY="-18" width="128" height="163"/>
     </elements>
 </model>
