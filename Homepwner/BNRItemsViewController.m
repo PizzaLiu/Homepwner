@@ -32,6 +32,8 @@
          */
         UINavigationItem *navItem = self.navigationItem;
         navItem.title = @"Homepwner";
+        self.restorationIdentifier = NSStringFromClass([self class]);
+        self.restorationClass = [self class];
 
         UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewItem:)];
         navItem.rightBarButtonItem = bbi;
@@ -101,6 +103,8 @@
 
     UINib *nib = [UINib nibWithNibName:@"BNRItemCell" bundle:nil];
     [self.tableView registerNib:nib forCellReuseIdentifier:@"BNRItemCell"];
+
+    self.tableView.restorationIdentifier = @"BNRItemsViewControllerTableView";
 }
 
 - (IBAction)addNewItem:(id)sender
@@ -116,6 +120,7 @@
     };
     UINavigationController *navViewController = [[UINavigationController alloc] initWithRootViewController:detailViewController];
     navViewController.modalPresentationStyle = UIModalPresentationFormSheet;
+    navViewController.restorationIdentifier = NSStringFromClass([navViewController class]);
     [self presentViewController:navViewController animated:YES completion:nil];
 }
 
@@ -187,6 +192,54 @@
     NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
 
     [defaultCenter removeObserver:self];
+}
+
++ (UIViewController *)viewControllerWithRestorationIdentifierPath:(NSArray *)identifierComponents coder:(NSCoder *)coder
+{
+    return [[self alloc] init];
+}
+
+
+- (void)encodeRestorableStateWithCoder:(NSCoder *)coder
+{
+    [coder encodeBool:self.isEditing forKey:@"TableViewIsEditing"];
+
+    [super encodeRestorableStateWithCoder:coder];
+}
+
+
+- (void)decodeRestorableStateWithCoder:(NSCoder *)coder
+{
+    self.editing = [coder decodeBoolForKey:@"TableViewIsEditing"];
+
+    [super decodeRestorableStateWithCoder:coder];
+}
+
+- (NSString *)modelIdentifierForElementAtIndexPath:(NSIndexPath *)idx inView:(UIView *)view
+{
+    NSString *identifier = nil;
+
+    if (idx && view) {
+        BNRItem *item = [[BNRItemStore sharedStore] allItems][idx.row];
+        identifier = item.itemKey;
+    }
+
+    return identifier;
+}
+
+- (NSIndexPath *)indexPathForElementWithModelIdentifier:(NSString *)identifier inView:(UIView *)view
+{
+    NSIndexPath *indexPath = nil;
+    NSArray *items = [[BNRItemStore sharedStore] allItems];
+    for (BNRItem *item in items) {
+        if ([identifier isEqualToString:item.itemKey]) {
+            int row = [items indexOfObjectIdenticalTo:item];
+            indexPath = [NSIndexPath indexPathForRow:row inSection:0];
+            break;
+        }
+    }
+
+    return indexPath;
 }
 
 @end
