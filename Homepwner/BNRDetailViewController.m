@@ -273,10 +273,10 @@
     NSString *assetTypeLabel = [[self.item assetType] valueForKey:@"label"];
 
     if (!assetTypeLabel) {
-        assetTypeLabel = @"None";
+        assetTypeLabel = NSLocalizedString(@"None", @"Type label None");
     }
 
-    self.assetTypeButton.title = [NSString stringWithFormat:@"Type: %@", assetTypeLabel];
+    self.assetTypeButton.title = [NSString stringWithFormat:NSLocalizedString(@"Type: %@", @"Asset type button"), assetTypeLabel];
 }
 
 + (UIViewController *)viewControllerWithRestorationIdentifierPath:(NSArray *)identifierComponents coder:(NSCoder *)coder

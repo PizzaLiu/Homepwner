@@ -31,7 +31,7 @@
         }
          */
         UINavigationItem *navItem = self.navigationItem;
-        navItem.title = @"Homepwner";
+        navItem.title = NSLocalizedString(@"Homepwner", @"Name of application");
         self.restorationIdentifier = NSStringFromClass([self class]);
         self.restorationClass = [self class];
 
@@ -43,6 +43,8 @@
 
         NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
         [defaultCenter addObserver:self selector:@selector(updateTableViewForDynamicTypeSize) name:UIContentSizeCategoryDidChangeNotification object:nil];
+
+        [defaultCenter addObserver:self selector:@selector(localeChange:) name:NSCurrentLocaleDidChangeNotification object:nil];
     }
     return self;
 }
@@ -59,14 +61,19 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    static NSNumberFormatter *valueFormatter;
+    if (!valueFormatter) {
+        valueFormatter = [[NSNumberFormatter alloc] init];
+        valueFormatter.numberStyle = NSNumberFormatterCurrencyStyle;
+    }
     // UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"UITableViewCell"];
     BNRItemCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BNRItemCell" forIndexPath:indexPath];
     NSArray *items = [[BNRItemStore sharedStore] allItems];
     BNRItem *item = items[indexPath.row];
-    
+
     cell.nameLabel.text = item.itemName;
     cell.serialNumberLabel.text = item.serialNumber;
-    cell.valueLabel.text = [NSString stringWithFormat:@"$%d", item.valueInDollars];
+    cell.valueLabel.text = [valueFormatter stringFromNumber:@(item.valueInDollars)];
     [cell.thumbnailView setImage:item.thumbnail];
     __weak BNRItemCell *wCell = cell;
     cell.actionBlock = ^{
@@ -240,6 +247,11 @@
     }
 
     return indexPath;
+}
+
+- (void)localeChange:(NSNotification *)note
+{
+    [self.tableView reloadData];
 }
 
 @end
