@@ -1,0 +1,15 @@
+
+/* Class = "UILabel"; text = "Name"; ObjectID = "0Hf-aa-dAi"; */
+"0Hf-aa-dAi.text" = "名称";
+
+/* Class = "UILabel"; text = "Value"; ObjectID = "9uR-Su-T5N"; */
+"9uR-Su-T5N.text" = "价格";
+
+/* Class = "UILabel"; text = "date"; ObjectID = "BNY-ES-HHX"; */
+"BNY-ES-HHX.text" = "日期";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "QEG-GS-1Ex"; */
+"QEG-GS-1Ex.title" = "物件";
+
+/* Class = "UILabel"; text = "Serial"; ObjectID = "koH-68-Naw"; */
+"koH-68-Naw.text" = "序列号";

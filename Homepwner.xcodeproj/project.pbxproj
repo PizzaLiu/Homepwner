@@ -58,6 +58,8 @@
 		3ED7D8AC1DEAD3DD00566762 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/BNRDetailViewController.strings; sourceTree = "<group>"; };
 		3ED7D8B01DEAE56400566762 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3ED7D8B21DEAE69100566762 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		3ED7D8B31DEAE7A700566762 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/BNRDetailViewController.strings"; sourceTree = "<group>"; };
+		3ED7D8B41DEAE7A700566762 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		5A548EE71DAE40B0006E1723 /* Homepwner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Homepwner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A548EEB1DAE40B0006E1723 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5A548EED1DAE40B0006E1723 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 			knownRegions = (
 				Base,
 				es,
+				"zh-Hans",
 			);
 			mainGroup = 5A548EDE1DAE40AF006E1723;
 			productRefGroup = 5A548EE81DAE40B0006E1723 /* Products */;
@@ -254,6 +257,7 @@
 				3ED7D8A91DEACDC800566762 /* Base */,
 				3ED7D8AB1DEAD21F00566762 /* es */,
 				3ED7D8AC1DEAD3DD00566762 /* en */,
+				3ED7D8B31DEAE7A700566762 /* zh-Hans */,
 			);
 			name = BNRDetailViewController.xib;
 			sourceTree = "<group>";
@@ -263,6 +267,7 @@
 			children = (
 				3ED7D8B01DEAE56400566762 /* Base */,
 				3ED7D8B21DEAE69100566762 /* es */,
+				3ED7D8B41DEAE7A700566762 /* zh-Hans */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
