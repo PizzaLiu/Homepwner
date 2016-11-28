@@ -5,7 +5,7 @@
 //  Created by Rainbow on 16/10/18.
 //  Copyright © 2016年 Liu. All rights reserved.
 //
-
+#import "AppDelegate.h"
 #import "BNRDetailViewController.h"
 #import "BNRItem.h"
 #import "BNRImageStore.h"
@@ -141,7 +141,16 @@
     BNRItem *item = self.item;
     item.itemName = self.nameField.text;
     item.serialNumber = self.serialNumberField.text;
-    item.valueInDollars = [self.valueField.text intValue];
+
+    int newValue = [self.valueField.text intValue];
+
+    if (newValue != item.valueInDollars) {
+        item.valueInDollars = [self.valueField.text intValue];
+
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setInteger:newValue forKey:BNRNextItemValuePrefsKey];
+    }
+
 }
 
 - (void)setItem:(BNRItem *)item

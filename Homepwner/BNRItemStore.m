@@ -5,6 +5,7 @@
 //  Created by Liu on 16/10/13.
 //  Copyright © 2016年 Liu. All rights reserved.
 //
+#import "AppDelegate.h"
 #import "BNRItemStore.h"
 #import "BNRItem.h"
 #import "BNRImageStore.h"
@@ -106,6 +107,13 @@
 
     BNRItem *item = [NSEntityDescription insertNewObjectForEntityForName:@"BNRItem" inManagedObjectContext:self.context];
     item.orderingValue = order;
+
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    item.valueInDollars = [defaults integerForKey:BNRNextItemValuePrefsKey];
+    item.itemName = [defaults stringForKey:BNRNextItemNamePrefsKey];
+
+    NSLog(@"defaults: %@", [defaults dictionaryRepresentation]);
+
     [self.privateItems addObject:item];
     return item;
 }

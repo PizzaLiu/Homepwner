@@ -21,6 +21,7 @@
 		3EBDD8311DD1B7E5004A9E6A /* BNRImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBDD8301DD1B7E5004A9E6A /* BNRImageViewController.m */; };
 		3ED7D8A51DEAC8CF00566762 /* BNRDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3ED7D8A71DEAC8CF00566762 /* BNRDetailViewController.xib */; };
 		3ED7D8AF1DEAE56400566762 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3ED7D8B11DEAE56400566762 /* Localizable.strings */; };
+		3ED7D8B61DEB08DB00566762 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3ED7D8B51DEB08DA00566762 /* Settings.bundle */; };
 		5A548EEC1DAE40B0006E1723 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A548EEB1DAE40B0006E1723 /* main.m */; };
 		5A548EEF1DAE40B0006E1723 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A548EEE1DAE40B0006E1723 /* AppDelegate.m */; };
 		5A548EF21DAE40B0006E1723 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A548EF11DAE40B0006E1723 /* ViewController.m */; };
@@ -60,6 +61,7 @@
 		3ED7D8B21DEAE69100566762 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3ED7D8B31DEAE7A700566762 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/BNRDetailViewController.strings"; sourceTree = "<group>"; };
 		3ED7D8B41DEAE7A700566762 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		3ED7D8B51DEB08DA00566762 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		5A548EE71DAE40B0006E1723 /* Homepwner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Homepwner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A548EEB1DAE40B0006E1723 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5A548EED1DAE40B0006E1723 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 				3E070A621DDDE2B5002C0AFF /* BNRAssetTypeDetailViewController.h */,
 				3E070A631DDDE2B5002C0AFF /* BNRAssetTypeDetailViewController.m */,
 				3E070A641DDDE2B5002C0AFF /* BNRAssetTypeDetailViewController.xib */,
+				3ED7D8B51DEB08DA00566762 /* Settings.bundle */,
 			);
 			path = Homepwner;
 			sourceTree = "<group>";
@@ -213,6 +216,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3ED7D8B61DEB08DB00566762 /* Settings.bundle in Resources */,
 				5A548EFA1DAE40B0006E1723 /* LaunchScreen.storyboard in Resources */,
 				5A548EF71DAE40B0006E1723 /* Assets.xcassets in Resources */,
 				5A548EF51DAE40B0006E1723 /* Main.storyboard in Resources */,
